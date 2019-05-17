@@ -67,6 +67,10 @@ sg_kibana_user:
         - indices:data/read/xpack/rollup*
         - indices:admin/mappings/get*
         - indices:admin/get
+    'logstash-${user_name}-*':
+      '*':
+        - READ
+
 
 # For the kibana server
 sg_kibana_server:

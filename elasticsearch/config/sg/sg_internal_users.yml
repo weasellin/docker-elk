@@ -37,3 +37,15 @@ snapshotrestore:
   hash: $2y$12$DpwmetHKwgYnorbgdvORCenv4NAK8cPUg8AI6pxLCuWf/ALc0.v7W
   roles:
     - snapshotrestore
+
+#password is: user1
+user1:
+  hash: $2y$12$DbXfvm0FIhY5sGBCgFvok.VBGcvx1TiVttuOpv082rHl72qaOPkbm
+  roles:
+    - kibanauser
+
+#password is: user2
+user2:
+  hash: $2y$12$KcQZm8WS/epijyiOz7J/QeMprFK/MKyWIEg/9a0VXqqh7b.oKyAum
+  roles:
+    - kibanauser

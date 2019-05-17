@@ -4,11 +4,25 @@
 #
 server.name: kibana
 server.host: "0"
-elasticsearch.url: http://elasticsearch:9200
 
-## Custom configuration
+## Search Guard Custom Configuration
 #
 elasticsearch.username: "kibanaserver"
 elasticsearch.password: "kibanaserver"
 
 searchguard.cookie.password: "123567818187654rwrwfsfshdhdhtegdhfzftdhncn"
+searchguard.cookie.secure: false
+
+## Own Home Custom Configuration
+#
+server.defaultRoute: /app/own_home
+
+elasticsearch.url: http://kibana:19200
+elasticsearch.ssl.verificationMode: none
+elasticsearch.requestHeadersWhitelist: [ cookie, authorization ]
+
+own_home.session.isSecure: false
+own_home.session.secretkey: "123567818187654rwrwfsfshdhdhtegdhfzftdhncn"
+own_home.elasticsearch.url: http://elasticsearch:9200
+own_home.get_username_from_session.enabled: true
+own_home.get_username_from_session.key: username
