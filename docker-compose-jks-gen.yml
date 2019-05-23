@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  searchguard-ssl:
+    build:
+      context: search-guard-ssl/
+    volumes:
+      - ./search-guard-ssl/output:/workdir/output
+    environment:
+      CA_PASS: ${SSL_CA_PASS}
+      TS_PASS: ${SSL_TS_PASS}
+      KS_PASS: ${SSL_KS_PASS}
+      CRT_DOMAIN: ${SSL_CRT_DOMAIN}
+      CRT_NODE_NAME: ${SSL_CRT_NODE_NAME}
+      CRT_NODE_DNAME: ${SSL_CRT_NODE_DNAME}
+      CRT_CLIENT_NAME: ${SSL_CRT_CLIENT_NAME}
+      CRT_CLIENT_DNAME: ${SSL_CRT_CLIENT_DNAME}

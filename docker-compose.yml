@@ -16,6 +16,11 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      TS_PASS: ${SSL_TS_PASS}
+      KS_PASS: ${SSL_KS_PASS}
+      CRT_NODE_NAME: ${SSL_CRT_NODE_NAME}
+      CRT_CLIENT_NAME: ${SSL_CRT_CLIENT_NAME}
+      CRT_CLIENT_DNAME: ${SSL_CRT_CLIENT_DNAME}
     networks:
       - elk
 

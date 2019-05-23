@@ -1,0 +1,3 @@
+[submodule "search-guard-ssl"]
+	path = search-guard-ssl
+	url = https://github.com/weasellin/search-guard-ssl.git
