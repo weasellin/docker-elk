@@ -3,4 +3,26 @@
 ## from https://github.com/elastic/logstash-docker/blob/master/build/logstash/config/logstash-oss.yml
 #
 http.host: "0.0.0.0"
+
+# Which directory should be used by logstash and its plugins
+path.data: /usr/share/logstash
+
+# ------------ Queuing Settings --------------#
+queue.type: persisted
+
+# If using queue.type: persisted, the directory path where the data files will be stored.#
+path.queue: /usr/share/logstash/data/queue
+
+# Flag to turn on dead-letter queue
+dead_letter_queue.enable: true
+
+# If using dead_letter_queue.enable: true, the directory path where the data files will be stored.
+path.dead_letter_queue: /usr/share/logstash/data/dead_letter_queue
+
+log.level: info
+
+path.logs: /usr/share/logstash/data/logs
+
+# Where to fetch the pipeline configuration for the main pipeline
 path.config: /usr/share/logstash/pipeline
+

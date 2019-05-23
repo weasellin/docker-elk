@@ -3,6 +3,7 @@ version: '2'
 services:
 
   elasticsearch:
+    image: docker-elk/elasticsearch:${LOCAL_IMG_VERSION}
     build:
       context: elasticsearch/
       args:
@@ -10,12 +11,14 @@ services:
         ELK_FLAVOUR: $ELK_FLAVOUR
         SG_VERSION: $SG_VERSION
     volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./elasticsearch/config/jvm.options:/usr/share/elasticsearch/config/jvm.options:ro
+      - ./elasticsearch/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties:ro
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       TS_PASS: ${SSL_TS_PASS}
       KS_PASS: ${SSL_KS_PASS}
       CRT_NODE_NAME: ${SSL_CRT_NODE_NAME}
@@ -25,16 +28,20 @@ services:
       - elk
 
   logstash:
+    image: docker-elk/logstash:${LOCAL_IMG_VERSION}
     build:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
         ELK_FLAVOUR: $ELK_FLAVOUR
     volumes:
+      - logstash_data:/usr/share/logstash/data
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/config/log4j2.properties:/usr/share/logstash/config/log4j2.properties:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
+      - "5044:5044"
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -44,6 +51,7 @@ services:
       - elasticsearch
 
   kibana:
+    image: docker-elk/kibana:${LOCAL_IMG_VERSION}
     build:
       context: kibana/
       args:
@@ -60,6 +68,9 @@ services:
       - elasticsearch
 
 networks:
-
   elk:
     driver: bridge
+
+volumes:
+  elasticsearch_data:
+  logstash_data:

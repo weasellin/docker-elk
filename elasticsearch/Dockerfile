@@ -17,3 +17,5 @@ RUN elasticsearch-plugin install --batch com.floragunn:search-guard-6:${ELK_VERS
 
 # Add your elasticsearch plugins setup here
 # Example: RUN elasticsearch-plugin install analysis-icu
+
+VOLUME ["/usr/share/elasticsearch/data"]
